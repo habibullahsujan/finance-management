@@ -1,11 +1,13 @@
+'use client'
 import { Button } from "@/components/ui/button";
-import { UserButton } from "@clerk/nextjs";
+import { useCreateAccount } from "@/features/accounts/hooks/use-create-account";
 
 export default function Home() {
+  const { onOpen } = useCreateAccount()
   return (
     <div>
-      <Button>Click Me</Button>
-      <UserButton/>
+      <Button onClick={onOpen}>Create</Button>
+
     </div>
   );
 }

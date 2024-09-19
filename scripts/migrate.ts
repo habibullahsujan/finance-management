@@ -7,7 +7,7 @@ import { config } from 'dotenv';
 
 config({ path: '.env.local' });
 
-const sql = neon(process.env.DATA_BASE_URL!);
+const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql);
 
 const main = async () => {
