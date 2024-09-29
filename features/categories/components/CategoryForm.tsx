@@ -1,21 +1,21 @@
-import { insertAccountSchema } from '@/database/schema'
+import {  insertCategories } from '@/database/schema'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form'
-import { Input } from './ui/input'
-import { Button } from './ui/button'
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../../../components/ui/form'
+import { Input } from '../../../components/ui/input'
+import { Button } from '../../../components/ui/button'
 import { TrashIcon } from 'lucide-react'
 
 
-const formSchema = insertAccountSchema.pick({
+const formSchema = insertCategories.pick({
     name: true
 })
 
 type FormValues = z.input<typeof formSchema>
 
-const zodSchema=z.object({
+const zodSchema = z.object({
     name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
 
 })
@@ -26,7 +26,7 @@ type Props = {
     onDelete?: () => void;
     disabled?: boolean
 }
-const AccountForm = ({ id, defaultValues, onSubmit, onDelete, disabled }: Props) => {
+const CategoryForm = ({ id, defaultValues, onSubmit, onDelete, disabled }: Props) => {
     const form = useForm<FormValues>({
         resolver: zodResolver(zodSchema),
         defaultValues: defaultValues
@@ -49,7 +49,7 @@ const AccountForm = ({ id, defaultValues, onSubmit, onDelete, disabled }: Props)
                         <FormItem>
                             <FormLabel>Name</FormLabel>
                             <FormControl>
-                                <Input disabled={disabled} {...field} placeholder='e.g Cash, Bank, Credit Card' />
+                                <Input disabled={disabled} {...field} placeholder='e.g Food, Travel, Installment' />
 
                             </FormControl>
                             {form.formState.errors.name && (
@@ -64,7 +64,7 @@ const AccountForm = ({ id, defaultValues, onSubmit, onDelete, disabled }: Props)
 
                 />
 
-                <Button className='w-full' type='submit' disabled={disabled}>{id ? 'Save changes' : "Create account"}</Button>
+                <Button className='w-full' type='submit' disabled={disabled}>{id ? 'Save changes' : "Create category"}</Button>
                 {
                     !!id && <Button
                         className='w-full'
@@ -74,7 +74,7 @@ const AccountForm = ({ id, defaultValues, onSubmit, onDelete, disabled }: Props)
                         type='button'
                     >
                         <TrashIcon className='size-4 mr-2' />
-                        Delete account
+                        Delete category
                     </Button>
                 }
             </form>
@@ -83,4 +83,4 @@ const AccountForm = ({ id, defaultValues, onSubmit, onDelete, disabled }: Props)
     )
 }
 
-export default AccountForm
+export default CategoryForm

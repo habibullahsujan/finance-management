@@ -20,8 +20,8 @@ const routes = [
         label: 'Accounts'
     },
     {
-        href: '/category',
-        label: 'Category'
+        href: '/categories',
+        label: 'Categories'
     },
     {
         href: '/settings',

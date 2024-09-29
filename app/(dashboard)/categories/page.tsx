@@ -1,30 +1,29 @@
 /* eslint-disable @next/next/no-async-client-component */
 'use client'
+
 import React from 'react'
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Loader2, Plus } from 'lucide-react'
 import { DataTable } from '@/components/DataTable'
 import { columns } from './columns'
-import { useGetAccounts } from '@/features/accounts/api/use-get-accounts'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useBulkDeleteAccounts } from '@/features/accounts/api/use-bulk-delete'
-import { useOpenAccount } from '@/features/accounts/hooks/use-open-account'
+import { useOpenCategory } from '@/features/categories/hooks/use-open-category'
+import { useGetCategories } from '@/features/categories/api/use-get-categories'
+import { useBulkDeleteCategories } from '@/features/categories/api/use-bulk-delete-categories'
 
+const CategoriesPage = () => {
 
-const AccountsPage = () => {
+    const { onOpen } = useOpenCategory()
+    const categoriesQuery = useGetCategories();
+    const bulkDeleteCategories = useBulkDeleteCategories();
 
-    const { onOpen } = useOpenAccount()
-   
+    const categories = categoriesQuery.data || [];
 
-    const accountsQuery = useGetAccounts();
-    const bulkDeleteAccounts = useBulkDeleteAccounts();
+    const isDisabled = categoriesQuery.isLoading || bulkDeleteCategories.isPending
 
-    const accounts = accountsQuery.data || [];
-
-    const isDisabled = accountsQuery.isLoading || bulkDeleteAccounts.isPending
-
-    if (accountsQuery.isLoading) {
+    if (categoriesQuery.isLoading) {
         return (
             <div className='max-w-screen-2xl mx-auto w-full pb-10 -mt-24'>
                 <Card className='border-none drop-shadow-sm '>
@@ -33,7 +32,6 @@ const AccountsPage = () => {
                     </CardHeader>
                     <CardContent>
                         <div className="h-[500px] w-full flex items-center justify-center">
-
                             <Loader2 className='size-6 text-slate-600 animate-spin' />
                         </div>
                     </CardContent>
@@ -47,7 +45,7 @@ const AccountsPage = () => {
             <Card className='border-none drop-shadow-sm '>
                 <CardHeader className='gap-y-2 lg:flex-row lg:items-center lg:justify-between'>
                     <CardTitle className='text-xl line-clamp-1'>
-                        Accounts Page
+                        Categories Page
                     </CardTitle>
                     <Button size="sm" onClick={onOpen}>
                         <Plus className='size-4 mr-2' />
@@ -55,9 +53,9 @@ const AccountsPage = () => {
                     </Button>
                 </CardHeader>
                 <CardContent>
-                    <DataTable  columns={columns} data={accounts} filterKey='name' disabled={isDisabled} onDelete={(row) => {
+                    <DataTable columns={columns} data={categories} filterKey='name' disabled={isDisabled} onDelete={(row) => {
                         const ids = row.map((r) => r.original.id)
-                        bulkDeleteAccounts.mutate({ ids })
+                        bulkDeleteCategories.mutate({ ids })
                     }} />
                 </CardContent>
             </Card>
@@ -65,4 +63,4 @@ const AccountsPage = () => {
     )
 }
 
-export default AccountsPage
+export default CategoriesPage

@@ -6,7 +6,8 @@ type TProps={
     onClose:()=>void
 }
 
-export const useCreateAccount=create<TProps>((set)=>({
+export const useOpenTransactionSheet=create<TProps>((set)=>({
+
     isOpen:false,
     onOpen:()=>set({isOpen:true}),
     onClose:()=>set({isOpen:false}),
