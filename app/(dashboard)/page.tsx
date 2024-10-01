@@ -1,13 +1,14 @@
-'use client'
-import { Button } from "@/components/ui/button";
-import { useOpenAccount } from "@/features/accounts/hooks/use-open-account";
+import React from 'react'
+import DataGrid from './(components)/DataGrid'
+import DataCharts from './(components)/DataCharts'
 
-export default function Home() {
-  const { onOpen } = useOpenAccount()
+const DashboardPage = () => {
   return (
-    <div>
-      <Button onClick={onOpen}>Create</Button>
-
+    <div className='max-w-screen-2xl mx-auto w-full pb-10 -mt-24'>
+      <DataGrid />
+      <DataCharts />
     </div>
-  );
+  )
 }
+
+export default DashboardPage

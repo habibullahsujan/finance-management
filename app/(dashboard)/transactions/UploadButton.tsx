@@ -1,3 +1,4 @@
+//@typescript-eslint/no-explicit-any
 import { Button } from '@/components/ui/button'
 import { Upload } from 'lucide-react'
 import React from 'react'
@@ -7,7 +8,10 @@ type Props = {
 }
 
 const UploadButton = ({ onUpload }: Props) => {
+
   const { CSVReader } = useCSVReader()
+
+
   return (
     <CSVReader onUploadAccepted={onUpload}>
       {({ getRootProps }: any) => (

@@ -4,6 +4,7 @@ import Navigation from './Navigation'
 import { UserButton, ClerkLoaded, ClerkLoading } from '@clerk/nextjs'
 import { LoaderIcon } from 'lucide-react'
 import WelcomeMsg from './WelcomeMsg'
+import Filters from './Filters'
 
 const Header = () => {
   return (
@@ -21,7 +22,8 @@ const Header = () => {
             <LoaderIcon className='size-4 animate-spin text-muted-foreground' />
           </ClerkLoading>
         </div>
-        <WelcomeMsg/>
+        <WelcomeMsg />
+        <Filters />
       </div>
     </header>
   )
