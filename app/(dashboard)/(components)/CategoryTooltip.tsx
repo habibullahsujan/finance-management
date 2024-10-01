@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { formatAmount } from '@/lib/utils';
 import { Separator } from '@radix-ui/react-select';
 import React from 'react'

@@ -1,4 +1,4 @@
-//@typescript-eslint/no-explicit-any
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from '@/components/ui/button'
 import { Upload } from 'lucide-react'
 import React from 'react'
